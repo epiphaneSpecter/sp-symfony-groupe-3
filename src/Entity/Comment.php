@@ -2,22 +2,19 @@
 
 namespace App\Entity;
 
-use App\Repository\PostRepository;
+use App\Repository\CommentRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity(repositoryClass: PostRepository::class)]
-class Post
+#[ORM\Entity(repositoryClass: CommentRepository::class)]
+class Comment
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
     private ?int $id = null;
-
-    #[ORM\Column(length: 255)]
-    private ?string $title = null;
 
     #[ORM\Column(type: Types::TEXT)]
     private ?string $content = null;
@@ -28,39 +25,28 @@ class Post
     #[ORM\Column(nullable: true)]
     private ?\DateTimeImmutable $updatedAt = null;
 
-    #[ORM\Column]
-    private ?bool $hidden = null;
+    #[ORM\ManyToOne(inversedBy: 'comments')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Post $post = null;
 
-    #[ORM\ManyToOne(inversedBy: 'posts')]
+    #[ORM\ManyToOne(inversedBy: 'comments')]
     #[ORM\JoinColumn(nullable: false)]
     private ?User $author = null;
 
     /**
-     * @var Collection<int, Comment>
+     * @var Collection<int, Report>
      */
-    #[ORM\OneToMany(targetEntity: Comment::class, mappedBy: 'post', orphanRemoval: true)]
-    private Collection $comments;
+    #[ORM\OneToMany(targetEntity: Report::class, mappedBy: 'comment', orphanRemoval: true)]
+    private Collection $reports;
 
     public function __construct()
     {
-        $this->comments = new ArrayCollection();
+        $this->reports = new ArrayCollection();
     }
 
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getTitle(): ?string
-    {
-        return $this->title;
-    }
-
-    public function setTitle(string $title): static
-    {
-        $this->title = $title;
-
-        return $this;
     }
 
     public function getContent(): ?string
@@ -99,14 +85,14 @@ class Post
         return $this;
     }
 
-    public function isHidden(): ?bool
+    public function getPost(): ?Post
     {
-        return $this->hidden;
+        return $this->post;
     }
 
-    public function setHidden(bool $hidden): static
+    public function setPost(?Post $post): static
     {
-        $this->hidden = $hidden;
+        $this->post = $post;
 
         return $this;
     }
@@ -124,29 +110,29 @@ class Post
     }
 
     /**
-     * @return Collection<int, Comment>
+     * @return Collection<int, Report>
      */
-    public function getComments(): Collection
+    public function getReports(): Collection
     {
-        return $this->comments;
+        return $this->reports;
     }
 
-    public function addComment(Comment $comment): static
+    public function addReport(Report $report): static
     {
-        if (!$this->comments->contains($comment)) {
-            $this->comments->add($comment);
-            $comment->setPost($this);
+        if (!$this->reports->contains($report)) {
+            $this->reports->add($report);
+            $report->setComment($this);
         }
 
         return $this;
     }
 
-    public function removeComment(Comment $comment): static
+    public function removeReport(Report $report): static
     {
-        if ($this->comments->removeElement($comment)) {
+        if ($this->reports->removeElement($report)) {
             // set the owning side to null (unless already changed)
-            if ($comment->getPost() === $this) {
-                $comment->setPost(null);
+            if ($report->getComment() === $this) {
+                $report->setComment(null);
             }
         }
 
