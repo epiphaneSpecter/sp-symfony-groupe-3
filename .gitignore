@@ -21,7 +21,7 @@
 
 ###> symfony/asset-mapper ###
 /public/assets/
-/assets/vendor/
+/assets/vendor/@hotwired
 ###< symfony/asset-mapper ###
 
 .idea
