@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}A propos{% endblock %}
+
+{% block body %}
+    {% include '_partials/header.html.twig' %}
+
+    <section class="eblog-author-area tp-section-gap2Top">
+        <div class="container">
+            <div class="section-inner">
+                <div class="image-area">
+                    <img src="{{ asset('images/banner/author.png') }}" width="307" alt="">
+                </div>
+                <div class="content-area">
+                    <h3 class="heading-title">Carole Boffard</h3>
+                    <p class="desc">Je m'appelle Carole et je suis une passionnée d'écriture. Depuis mon plus jeune âge, j'ai toujours trouvé refuge et inspiration dans les mots, les phrases et les histoires. Écrire est pour moi bien plus qu'un simple passe-temps ; c'est une véritable vocation, un moyen d'exprimer mes pensées, mes émotions et mes idées.
+
+                        Sur ce site, ainsi que sur mes réseaux sociaux, je partage mes écrits avec une communauté de lecteurs passionnés. Mon objectif est de toucher, d'inspirer et de créer des liens à travers mes histoires et mes réflexions. Que ce soit par des récits fictifs, des essais personnels ou des poèmes, j'aspire à apporter un peu de magie et de réflexion dans la vie de chacun.
+
+                        N'hésitez pas à parcourir mes écrits, à laisser vos commentaires et à partager vos propres histoires. L'écriture est une aventure collective, et je suis ravie de pouvoir la vivre avec vous.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    {% include '_partials/footer.html.twig' %}
+
+    <div id="anywhere-home"></div>
+{% endblock %}

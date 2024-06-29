@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Contact{% endblock %}
+
+{% block body %}
+    {% include '_partials/header.html.twig' %}
+
+    <section class="eblog-author-area tp-section-gap2Top">
+        <div class="container">
+            <div class="section-inner">
+                <div class="image-area">
+                    <img src="{{ asset('images/banner/author.png') }}" width="307" alt="">
+                </div>
+                <div class="content-area">
+                    <h3 class="heading-title">Carole Boffard</h3>
+                    <p class="desc">Nous contacter sur l'adresse email carole.boffard@gmail.com</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    {% include '_partials/footer.html.twig' %}
+
+    <div id="anywhere-home"></div>
+{% endblock %}

@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Repository\ReportRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 #[ORM\Entity(repositoryClass: ReportRepository::class)]
 class Report
@@ -74,7 +75,7 @@ class Report
         return $this->author;
     }
 
-    public function setAuthor(?User $author): static
+    public function setAuthor(?UserInterface $author): static
     {
         $this->author = $author;
 
