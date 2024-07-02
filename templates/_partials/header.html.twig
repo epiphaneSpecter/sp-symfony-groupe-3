@@ -23,6 +23,9 @@
                                     {% else %}
                                         <li class="menu-item"><a href="{{ path('app_logout') }}" class="eblog-dropdown-main-element">Se deconnecter</a></li>
                                     {% endif %}
+                                    {% if is_granted('ROLE_ADMIN') %}
+                                        <li class="menu-item"><a href="{{ path('admin') }}" class="eblog-dropdown-main-element">Administration</a></li>
+                                    {% endif %}
 
                                 </ul>
                             </div>
