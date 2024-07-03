@@ -1,23 +1,50 @@
-{#{% extends 'base.html.twig' %}#}
+{% extends 'base.html.twig' %}
 
 {% block title %}Register{% endblock %}
 
 {% block body %}
+
+    {% form_theme registrationForm 'form/signup_form_theme.html.twig' %}
+
+
     {% for flash_error in app.flashes('verify_email_error') %}
         <div class="alert alert-danger" role="alert">{{ flash_error }}</div>
     {% endfor %}
 
-    <h1>Register</h1>
-
-    {{ form_errors(registrationForm) }}
-
-    {{ form_start(registrationForm) }}
-        {{ form_row(registrationForm.email) }}
-        {{ form_row(registrationForm.plainPassword, {
-            label: 'Password'
-        }) }}
-        {{ form_row(registrationForm.agreeTerms) }}
-
-        <button type="submit" class="btn">Register</button>
-    {{ form_end(registrationForm) }}
+    <section class="eblog-sign-up-area tp-section-gap">
+        <div class="container">
+            <div class="section-inner">
+                <div class="row justify-content-center">
+                    <div class="col-lg-4 col-md-8">
+                        <h2 class="heading-title text-center">S'inscrire</h2>
+                        {{ form_start(registrationForm) }}
+                        <div class="form-inner inner">
+                            {{ form_row(registrationForm.email) }}
+                            {{ form_row(registrationForm.plainPassword) }}
+                            {{ form_row(registrationForm.firstName) }}
+                            {{ form_row(registrationForm.lastName) }}
+                            <div class="single-input-wrapper check two">
+                                <div class="check-inner">
+                                    {{ form_widget(registrationForm.agreeTerms, {
+                                        'id': 'registration_form_agreeTerms',
+                                        'value': registrationForm.agreeTerms.vars.value,
+                                        'attr': {'required': 'required'}
+                                    }) }}
+                                    <label for="registration_form_agreeTerms"> Souviens-toi de moi</label><br>
+                                    {{ form_errors(registrationForm.agreeTerms) }}
+                                </div>
+                            </div>
+                            <div class="single-input-wrapper">
+                                <button type="submit" class="subscribe-btn tp-btn btn-primary">Créer un compte</button>
+                            </div>
+                        </div>
+                        <div class="form-bottom-text">
+                            <p class="text-center">Avez vous déjà un compte? <a href="{{ path('app_login') }}">Se connecter</a> </p>
+                        </div>
+                        {{ form_end(registrationForm) }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 {% endblock %}

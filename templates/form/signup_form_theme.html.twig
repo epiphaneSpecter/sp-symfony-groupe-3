@@ -1,0 +1,15 @@
+
+{% block form_row %}
+    <div class="single-input-wrapper">
+        {{ form_label(form) }}
+        {{ form_widget(form, {'attr': {'placeholder': form.vars.label}}) }}
+        {{ form_errors(form) }}
+    </div>
+{% endblock %}
+
+{% block form_label %}
+{% endblock %}
+
+{% block form_widget_simple %}
+    <input type="{{ type|default('text') }}" {{ block('widget_attributes') }} value="{{ value }}" />
+{% endblock %}
